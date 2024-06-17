@@ -1,0 +1,24 @@
+body{
+    background-color: rgb(66, 65, 70)
+}
+
+p{
+    color: rgb(180, 176, 176);
+    font-size: 20px;
+}
+
+h1 {
+    color: white;
+}
+ol{
+    color: white;
+}
+nav{
+    background-color: rgb(165, 186, 209);
+    height: 50px;
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Welcome to Page 2!</h1>
+
+<p>My favourite bands are: </p>
+
+<ol>
+{% for entry in favourite_bands %}
+<li>
+    {% if entry.band %}
+        <strong>Band:</strong> {{ entry.band }}<br>
+    {% endif %}
+    {% if entry.song %}
+        <strong>Song:</strong> {{ entry.song }}<br>
+    {% endif %}
+    {% if entry.album %}
+        <strong>Album:</strong> {{ entry.album }}<br>
+    {% endif %}
+    {% if entry.rating %}
+        <strong>Rating:</strong> {{ entry.rating }}
+    {% endif %}
+    {% if entry.rating %}
+        <strong>Rating:</strong>
+        <span class="fa fa-star{% if entry.rating >= 1 %} checked{% endif %}"></span>
+        <span class="fa fa-star{% if entry.rating >= 2 %} checked{% endif %}"></span>
+        <span class="fa fa-star{% if entry.rating >= 3 %} checked{% endif %}"></span>
+        <span class="fa fa-star{% if entry.rating >= 4 %} checked{% endif %}"></span>
+        <span class="fa fa-star{% if entry.rating >= 5 %} checked{% endif %}"></span>
+    {% endif %}
+</li>
+{% endfor %}
+</ol>
+{% endblock %}
