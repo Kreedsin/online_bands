@@ -20,9 +20,8 @@
             unicode-bidi: bidi-override;
             display: inline-block;
         }
-        .rating input {
-            display: none;
-        }
+        /* .rating input {
+        } */
         .rating label {
             color: #ddd;
             font-size: 2em;
@@ -42,8 +41,6 @@
                 <input type="text" id="favSong" name="favorite_song" placeholder="Enter your favorite song" required>
                 <br><br>
                 <input type="text" id="favAlbum" name="favorite_album" placeholder="Enter your favorite album" required>
-                <br><br>
-                <input type="number" id="rating" name="rating" min="1" max="5" placeholder="Submit a Rating (1-5):" required>
                 <br><br>
                 <div class="rating">
                     <input type="radio" id="star5" name="rating" value="5" required><label for="star5" class="fa fa-star"></label>

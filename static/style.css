@@ -22,3 +22,13 @@ nav{
     justify-content: space-evenly;
     align-items: center;
 }
+.checked {
+    color: orange;
+  }
+.rating {
+    color: orange;
+  }
+
+  .ratingsy {
+    color: orange;
+  }

@@ -2,10 +2,19 @@
 
 {% block content %}
 <h1>Welcome to Page 2!</h1>
-
+<h2>If you would like to see bands based on their rating, click a star!</h2>
+<form action="/page2" method="get">
+<div class="rating">
+    <input type="radio" id="star5" name="rating" value="1" required><label for="star5" class="fa fa-star"></label>
+    <input type="radio" id="star4" name="rating" value="2"><label for="star4" class="fa fa-star"></label>
+    <input type="radio" id="star3" name="rating" value="3"><label for="star3" class="fa fa-star"></label>
+    <input type="radio" id="star2" name="rating" value="4"><label for="star2" class="fa fa-star"></label>
+    <input type="radio" id="star1" name="rating" value="5"><label for="star1" class="fa fa-star"></label>
+</div>
+</form>
 <p>My favourite bands are: </p>
 
-<ol>
+<ol id="rating-list">
 {% for entry in favourite_bands %}
 <li>
     {% if entry.band %}
@@ -18,9 +27,6 @@
         <strong>Album:</strong> {{ entry.album }}<br>
     {% endif %}
     {% if entry.rating %}
-        <strong>Rating:</strong> {{ entry.rating }}
-    {% endif %}
-    {% if entry.rating %}
         <strong>Rating:</strong>
         <span class="fa fa-star{% if entry.rating >= 1 %} checked{% endif %}"></span>
         <span class="fa fa-star{% if entry.rating >= 2 %} checked{% endif %}"></span>
@@ -31,4 +37,34 @@
 </li>
 {% endfor %}
 </ol>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const stars = document.querySelectorAll('.rating input');
+        stars.forEach(star => {
+            star.addEventListener('change', function() {
+                fetchRatings(this.value);
+            });
+        });
+    });
+    
+    function fetchRatings(rating) {
+        fetch(`/ratings/${rating}`)
+            .then(response => response.json())
+            .then(data => {
+                const list = document.getElementById('rating-list');
+                list.innerHTML = '';
+                data.forEach(entry => {
+                    const item = document.createElement('li');
+                    item.innerHTML = `<strong>Band:</strong> ${entry.band} <br> <strong>Song:</strong> ${entry.song} <br> <strong>Album:</strong> ${entry.album} <br> <strong>Rating:</strong> 
+                    <span class="fa fa-star${entry.rating >= 1 ? ' checked' : ''}"></span>
+                    <span class="fa fa-star${entry.rating >= 2 ? ' checked' : ''}"></span>
+                    <span class="fa fa-star${entry.rating >= 3 ? ' checked' : ''}"></span>
+                    <span class="fa fa-star${entry.rating >= 4 ? ' checked' : ''}"></span>
+                    <span class="fa fa-star${entry.rating >= 5 ? ' checked' : ''}"></span>`;
+                    list.appendChild(item);
+                });
+            });
+    }
+    </script>
 {% endblock %}
